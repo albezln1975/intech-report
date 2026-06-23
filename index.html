@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LinkedIn Ads · Employee Advocacy Report</title>
+<title>LinkedIn Ads Report</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -16,48 +16,60 @@
   --mono:'IBM Plex Mono',monospace; --sans:'Inter',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;padding-bottom:60px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;padding-bottom:48px}
 
-.header{background:var(--navy);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:60px}
-.h-left{display:flex;align-items:center;gap:14px}
+/* ── Header / toolbar ─────────────────────────────────────────── */
+.header{background:var(--navy);padding:0 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;min-height:60px}
+.h-left{display:flex;align-items:center;gap:13px;margin-right:8px}
 .li-icon{width:30px;height:30px;background:var(--li-blue);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:13px;color:#fff}
-.h-title{font-size:15px;font-weight:600;color:#fff}
-.h-title span{color:rgba(255,255,255,.45);font-weight:400}
-.period{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.45)}
+.h-title{font-size:15px;font-weight:600;color:#fff;white-space:nowrap}
+.h-title span{color:rgba(255,255,255,.5);font-weight:400}
+.toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btn-pdf{display:inline-flex;align-items:center;gap:7px;background:var(--li-blue);color:#fff;border:none;border-radius:7px;padding:8px 14px;font-family:var(--sans);font-size:12.5px;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-pdf:hover{background:#0950a0}
+.win-select{background:var(--navy2);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:7px;padding:8px 30px 8px 12px;font-family:var(--sans);font-size:12.5px;font-weight:500;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center}
+.win-meta{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.55);line-height:1.5;white-space:nowrap}
+.win-meta b{color:rgba(255,255,255,.9);font-weight:600}
 
-.note{background:#FEF9EC;border-bottom:1px solid #F3E2B8;padding:9px 40px;font-size:12px;color:#8A6A1E}
+.note{background:#FEF9EC;border-bottom:1px solid #F3E2B8;padding:9px 32px;font-size:12px;color:#8A6A1E}
 .note.hide{display:none}
 
-.wrap{max-width:1240px;margin:0 auto;padding:28px 40px}
-.intro{margin-bottom:24px}
-.intro h1{font-size:20px;font-weight:600;margin-bottom:6px}
-.intro p{font-size:13px;color:var(--text2);max-width:760px;line-height:1.5}
+/* ── KPI bar (attaccata sotto header) ─────────────────────────── */
+.kpibar{display:grid;grid-template-columns:repeat(6,1fr);background:var(--white);border-bottom:1px solid var(--border2);box-shadow:var(--shadow)}
+.kpibar .cell{padding:15px 22px;border-right:1px solid var(--border)}
+.kpibar .cell:last-child{border-right:none}
+.kpibar .k-name{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:7px}
+.kpibar .k-val{font-family:var(--mono);font-size:23px;font-weight:600;line-height:1;letter-spacing:-.5px;color:var(--navy)}
+.kpibar .k-val .u{font-size:13px;font-weight:400;color:var(--text3);margin-left:2px}
 
-.sec-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:30px 0 14px}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 32px}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:28px 0 13px}
+.sec-label:first-child{margin-top:6px}
 
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.kpi{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow)}
-.kpi-name{font-size:10px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
-.kpi-val{font-family:var(--mono);font-size:26px;font-weight:600;line-height:1;letter-spacing:-.5px;color:var(--navy)}
-.kpi-val .u{font-size:14px;font-weight:400;color:var(--text3);margin-left:2px}
-.kpi-sub{margin-top:8px;font-size:11px;color:var(--text2)}
-.kpi.hl{background:var(--navy);border-color:var(--navy)}
-.kpi.hl .kpi-name{color:rgba(255,255,255,.55)}
-.kpi.hl .kpi-val{color:#fff}
-.kpi.hl .kpi-val .u{color:rgba(255,255,255,.6)}
-.kpi.hl .kpi-sub{color:rgba(255,255,255,.6)}
-
+/* ── Card / tabelle ───────────────────────────────────────────── */
 .card{background:var(--white);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
 .card-head{background:var(--navy);padding:11px 18px;display:flex;justify-content:space-between;align-items:center}
 .card-head h3{font-size:12px;font-weight:600;color:#fff;letter-spacing:.3px}
 .card-head .cnt{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.5)}
 
+/* campagne */
+.camp{display:grid;grid-template-columns:1fr 110px repeat(5,84px);gap:0;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border)}
+.camp:last-child{border-bottom:none}
+.camp.head{padding:9px 18px;background:var(--bg);border-bottom:1px solid var(--border2)}
+.camp.head span{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);text-align:right}
+.camp.head span:first-child,.camp.head span:nth-child(2){text-align:left}
+.c-name{font-size:13px;font-weight:600;color:var(--navy)}
+.c-obj{display:inline-block;margin-top:4px;font-size:10px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:#E8F0FB;color:var(--li-blue)}
+.c-status{font-size:11px;color:var(--text2);display:flex;align-items:center;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.dot.on{background:var(--green)}.dot.off{background:var(--text3)}
+
+/* post */
 .post{display:grid;grid-template-columns:1fr repeat(6,90px);gap:0;align-items:center;padding:16px 18px;border-bottom:1px solid var(--border)}
 .post:last-child{border-bottom:none}
 .post.head{padding:9px 18px;background:var(--bg);border-bottom:1px solid var(--border2)}
 .post.head span{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);text-align:right}
 .post.head span:first-child{text-align:left}
-
 .author{display:flex;gap:12px;align-items:flex-start;padding-right:18px}
 .avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:13px;color:#fff}
 .a-name{font-size:13px;font-weight:600;margin-bottom:2px}
@@ -67,10 +79,31 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .a-link:hover{text-decoration:underline}
 .m{font-family:var(--mono);font-size:14px;font-weight:600;text-align:right;color:var(--navy)}
 .m small{display:block;font-size:10px;font-weight:400;color:var(--text3);margin-top:3px;font-family:var(--sans)}
-.m.good{color:var(--green)}
-.m.warn{color:var(--amber)}
+.m.good{color:var(--green)}.m.warn{color:var(--amber)}
 
-.foot{font-size:11px;color:var(--text3);margin-top:18px;text-align:center}
+/* engagement focus */
+.eng-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.eng{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);text-align:center}
+.eng-ico{font-size:18px;margin-bottom:8px}
+.eng-val{font-family:var(--mono);font-size:24px;font-weight:600;line-height:1;color:var(--navy)}
+.eng-name{font-size:11px;color:var(--text2);margin-top:8px;font-weight:500}
+
+/* ── Footer fisso ─────────────────────────────────────────────── */
+.footer{position:fixed;left:0;right:0;bottom:0;background:var(--navy);color:rgba(255,255,255,.7);height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-size:11.5px;z-index:20}
+.footer .f-c{font-family:var(--mono);color:rgba(255,255,255,.85)}
+.footer b{color:#fff;font-weight:600}
+
+@media print{
+  .toolbar,.btn-pdf,.win-select,.note{display:none!important}
+  .footer{position:static}
+  body{padding-bottom:0;background:#fff}
+  .card,.kpibar,.eng{box-shadow:none}
+}
+@media(max-width:760px){
+  .kpibar{grid-template-columns:repeat(2,1fr)}
+  .eng-grid{grid-template-columns:repeat(2,1fr)}
+  .camp,.post{grid-template-columns:1fr;gap:4px}
+}
 </style>
 </head>
 <body>
@@ -78,20 +111,33 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 <div class="header">
   <div class="h-left">
     <div class="li-icon">in</div>
-    <div class="h-title">Employee Advocacy <span id="clientName">· NOME CLIENTE</span></div>
+    <div class="h-title">LinkedIn Ads Report <span id="clientName">· —</span></div>
   </div>
-  <div class="period" id="period">—</div>
+  <div class="toolbar">
+    <button class="btn-pdf" onclick="window.print()">⬇ Scarica PDF</button>
+    <select class="win-select" id="winSelect" onchange="applyWindow(this.value)">
+      <option value="7">Ultimi 7 giorni</option>
+      <option value="14">Ultimi 14 giorni</option>
+      <option value="30">Ultimi 30 giorni</option>
+      <option value="60" selected>Ultimi 60 giorni</option>
+      <option value="mese-2026-06">Giugno 2026</option>
+    </select>
+    <div class="win-meta">Periodo: <b id="periodRef">—</b><br>Aggiornato: <b id="updRef">—</b></div>
+  </div>
 </div>
 <div class="note" id="mockNote">⚠️ Anteprima con dati di esempio — sostituire con i dati reali della campagna.</div>
 
-<div class="wrap">
-  <div class="intro">
-    <h1>Report sponsorizzazioni · LinkedIn Ads</h1>
-    <p>Sintesi delle campagne che amplificano i post pubblicati dai dipendenti tramite la company page. Obiettivo: massimizzare reach qualificata e interazioni sul personal branding del team.</p>
-  </div>
+<div class="kpibar" id="kpibar"></div>
 
-  <div class="sec-label">Panoramica del periodo</div>
-  <div class="kpi-grid" id="kpiGrid"></div>
+<div class="wrap">
+  <div class="sec-label">Campagne / gruppi di annunci</div>
+  <div class="card">
+    <div class="card-head"><h3>CAMPAGNE</h3><span class="cnt" id="campCount"></span></div>
+    <div class="camp head">
+      <span>Campagna</span><span>Obiettivo / stato</span><span>Impr.</span><span>Click</span><span>CTR</span><span>Spesa</span><span>CPC</span>
+    </div>
+    <div id="campList"></div>
+  </div>
 
   <div class="sec-label">Dettaglio post sponsorizzati</div>
   <div class="card">
@@ -102,37 +148,31 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
     <div id="postList"></div>
   </div>
 
-  <div class="foot" id="foot"></div>
+  <div class="sec-label">Focus engagement (obiettivo campagna)</div>
+  <div class="eng-grid" id="engGrid"></div>
+</div>
+
+<div class="footer">
+  <div class="f-l">Fonte: <b>LinkedIn Campaign Manager</b></div>
+  <div class="f-c" id="footPeriod">—</div>
+  <div class="f-r">Cliente: <b id="footClient">—</b></div>
 </div>
 
 <script>
 // ════════════════════════════════════════════════════════════════════
-//  DATI MOCK — sostituire con caricamento da JSON quando account pronto.
-//  Vedi loadData() in fondo: scommentare il blocco fetch().
+//  DATI MOCK — fallback se i JSON reali non sono raggiungibili.
 // ════════════════════════════════════════════════════════════════════
-
-// NUMERI per post (formato uguale a output di fetch-creatives.js).
-// La chiave `creative` = urn:li:sponsoredCreative:* dall'API analytics.
-const MOCK_POSTS = [
-  { creative:"urn:li:sponsoredCreative:1001", impressions:48200, clicks:412, spend:720, likes:2480, comments:410, shares:250, follows:48 },
-  { creative:"urn:li:sponsoredCreative:1002", impressions:39800, clicks:355, spend:610, likes:1900, comments:330, shares:180, follows:41 },
-  { creative:"urn:li:sponsoredCreative:1003", impressions:31500, clicks:240, spend:540, likes:1310, comments:230, shares:140, follows:33 },
-  { creative:"urn:li:sponsoredCreative:1004", impressions:28300, clicks:175, spend:510, likes:1010, comments:180, shares:100, follows:25 },
-  { creative:"urn:li:sponsoredCreative:1005", impressions:21400, clicks:120, spend:460, likes:640, comments:120, shares:60, follows:18 },
-  { creative:"urn:li:sponsoredCreative:1006", impressions:15300, clicks:95,  spend:400, likes:370, comments:70,  shares:40, follows:14 }
+const MOCK_CAMPAIGNS = [
+  { campaign:"urn:li:sponsoredCampaign:9001", name:"Engagement · Company list · USA", objective:"ENGAGEMENT", status:"ACTIVE", impressions:2534, clicks:152, spend:192, likes:2, comments:0, shares:0, follows:0 },
+  { campaign:"urn:li:sponsoredCampaign:9002", name:"Engagement · Company list · EU",  objective:"ENGAGEMENT", status:"ACTIVE", impressions:2351, clicks:126, spend:141, likes:4, comments:2, shares:0, follows:0 }
 ];
-
-// LABEL manuali — file creative-labels.json. Mappa creative URN → testo+autore.
-const MOCK_LABELS = {
-  "urn:li:sponsoredCreative:1001": { autore:"Marco Rossi",   ruolo:"Head of Sales",       colore:"#0A66C2", testo:"3 cose che ho imparato chiudendo il trimestre più difficile della mia carriera commerciale…" },
-  "urn:li:sponsoredCreative:1002": { autore:"Giulia Bianchi",ruolo:"Product Lead",        colore:"#8B5CF6", testo:"Abbiamo rifatto l'onboarding da zero. Ecco il framework che usiamo ora, passo per passo." },
-  "urn:li:sponsoredCreative:1003": { autore:"Luca Verdi",    ruolo:"CTO",                 colore:"#0CC4B0", testo:"Perché abbiamo scelto di non usare microservizi (per ora). Una decisione controcorrente." },
-  "urn:li:sponsoredCreative:1004": { autore:"Sara Ferri",    ruolo:"Marketing Manager",   colore:"#F59E0B", testo:"Il nostro post più virale di sempre era un errore. Cosa ci ha insegnato sull'algoritmo." },
-  "urn:li:sponsoredCreative:1005": { autore:"Andrea Conti",  ruolo:"Customer Success",    colore:"#10B981", testo:"Un cliente stava per andarsene. Ecco la telefonata che ha cambiato tutto." },
-  "urn:li:sponsoredCreative:1006": { autore:"Davide Neri",   ruolo:"Founder",             colore:"#3A5575", testo:"Annuncio importante sul nostro round di finanziamento e cosa significa per il team." }
-};
-
-const MOCK_META = { client:"NOME CLIENTE", period:"1–30 GIU 2026", updated:"2026-06-23" };
+const MOCK_POSTS = [
+  { creative:"urn:li:sponsoredCreative:1001", impressions:2414, clicks:181, spend:174, likes:4, comments:1, shares:0, follows:0 },
+  { creative:"urn:li:sponsoredCreative:1002", impressions:1282, clicks:52,  spend:78,  likes:1, comments:1, shares:0, follows:0 },
+  { creative:"urn:li:sponsoredCreative:1003", impressions:1081, clicks:40,  spend:73,  likes:0, comments:0, shares:0, follows:0 }
+];
+const MOCK_LABELS = {};
+const MOCK_META = { client:"Intech Rotors", period:"", windowDays:60, updated:"2026-06-23" };
 
 // ──────────────────────────────────────────────────────────────────────
 //  Helper formato
@@ -143,58 +183,106 @@ const eur2  = n => n.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFrac
 const pct   = n => n.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2});
 const react = p => (p.likes||0)+(p.comments||0)+(p.shares||0);
 const initials = name => name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+const MESI = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+const dLabel = d => d.getDate()+' '+MESI[d.getMonth()]+' '+d.getFullYear();
+
+// Stato condiviso per il cambio finestra temporale.
+let STATE = { campaigns:[], posts:[], labels:{}, meta:{} };
+
+// Calcola periodo di riferimento (testo) dalla finestra selezionata.
+// NB: i dati attuali sono un unico aggregato 60gg → il filtro per finestra
+// mostrerà gli stessi numeri finché fetch non produce granularità DAILY.
+function periodText(winVal, meta){
+  const upd = new Date(meta.updated);
+  if(String(winVal).startsWith('mese-')){
+    const [y,m] = winVal.slice(5).split('-').map(Number);
+    const first = new Date(y, m-1, 1), last = new Date(y, m, 0);
+    return first.getDate()+'–'+last.getDate()+' '+MESI[m-1]+' '+y;
+  }
+  const days = parseInt(winVal,10) || meta.windowDays || 60;
+  const start = new Date(upd.getTime() - days*864e5);
+  return dLabel(start)+' – '+dLabel(upd);
+}
+
+function applyWindow(winVal){
+  const pt = periodText(winVal, STATE.meta);
+  document.getElementById('periodRef').textContent = pt;
+  document.getElementById('footPeriod').textContent = pt;
+  // Filtro reale per finestra: da abilitare quando social-data.json avrà
+  // granularità giornaliera (timeGranularity=DAILY in fetch-creatives.js).
+  render(STATE.campaigns, STATE.posts, STATE.labels, STATE.meta, false);
+}
 
 // ──────────────────────────────────────────────────────────────────────
-//  Render — modello misto: metriche traffico (click/CTR/CPC) + social
+//  Render
 // ──────────────────────────────────────────────────────────────────────
-function render(posts, labels, meta) {
+function render(campaigns, posts, labels, meta, resetHeader=true){
+  STATE = { campaigns, posts, labels, meta };
+
   const T = posts.reduce((a,p)=>({
-    spend:a.spend+(p.spend||0), impr:a.impr+(p.impressions||0), clicks:a.clicks+(p.clicks||0),
-    react:a.react+react(p), follows:a.follows+(p.follows||0)
-  }), {spend:0,impr:0,clicks:0,react:0,follows:0});
-
+    spend:a.spend+(p.spend||0), impr:a.impr+(p.impressions||0), clicks:a.clicks+(p.clicks||0)
+  }), {spend:0,impr:0,clicks:0});
   const cpm = T.impr ? T.spend/T.impr*1000 : 0;
   const cpc = T.clicks ? T.spend/T.clicks : 0;
   const ctr = T.impr ? T.clicks/T.impr*100 : 0;
 
-  document.getElementById('clientName').textContent = '· ' + meta.client;
-  document.getElementById('period').textContent = meta.period || '—';
-  const d = new Date(meta.updated);
-  document.getElementById('foot').textContent =
-    'Report generato il ' + d.toLocaleDateString('it-IT',{day:'2-digit',month:'short',year:'numeric'}) +
-    ' · dati LinkedIn Ads API';
+  // header / footer testuali
+  document.getElementById('clientName').textContent = '· ' + (meta.client||'—');
+  document.getElementById('footClient').textContent = meta.client||'—';
+  document.getElementById('updRef').textContent = dLabel(new Date(meta.updated));
+  if(resetHeader){
+    const win = document.getElementById('winSelect').value;
+    const pt = periodText(win, meta);
+    document.getElementById('periodRef').textContent = pt;
+    document.getElementById('footPeriod').textContent = pt;
+  }
 
-  // KPI — primari: traffico. Secondari: social.
+  // ── KPI bar (6 dati) ──
   const kpis = [
-    { n:'Spesa totale',   v:eur(T.spend),  u:'€', s:posts.length+' post sponsorizzati' },
-    { n:'Impressioni',    v:fmt(T.impr),   u:'',  s:'CPM medio '+eur2(cpm)+' €' },
-    { n:'Click totali',   v:fmt(T.clicks), u:'',  s:'verso post / profilo' },
-    { n:'CTR medio',      v:pct(ctr),      u:'%', s:'click / impressioni' },
-    { n:'CPC medio',      v:eur2(cpc),     u:'€', s:'costo per click', hl:true },
-    { n:'Reazioni social',v:fmt(T.react),  u:'',  s:'like · commenti · condivisioni' },
-    { n:'Nuovi follower', v:'+'+fmt(T.follows), u:'', s:'company page' },
-    { n:'Post attivi',    v:fmt(posts.length), u:'', s:'nel periodo' }
+    { n:'Spesa totale', v:eur(T.spend),  u:'€' },
+    { n:'Impressioni',  v:fmt(T.impr),   u:''  },
+    { n:'CPM',          v:eur2(cpm),     u:'€' },
+    { n:'Click totali', v:fmt(T.clicks), u:''  },
+    { n:'CPC medio',    v:eur2(cpc),     u:'€' },
+    { n:'CTR',          v:pct(ctr),      u:'%' }
   ];
-  document.getElementById('kpiGrid').innerHTML = kpis.map(k=>`
-    <div class="kpi${k.hl?' hl':''}">
-      <div class="kpi-name">${k.n}</div>
-      <div class="kpi-val">${k.v}${k.u?`<span class="u">${k.u}</span>`:''}</div>
-      <div class="kpi-sub">${k.s}</div>
+  document.getElementById('kpibar').innerHTML = kpis.map(k=>`
+    <div class="cell">
+      <div class="k-name">${k.n}</div>
+      <div class="k-val">${k.v}${k.u?`<span class="u">${k.u}</span>`:''}</div>
     </div>`).join('');
 
-  // tabella post — ordina per click desc
+  // ── Tabella campagne ──
+  const crows = (campaigns||[]).slice().sort((a,b)=>b.spend-a.spend);
+  document.getElementById('campCount').textContent = crows.length+' campagne · per spesa';
+  document.getElementById('campList').innerHTML = crows.map(c=>{
+    const cctr = c.impressions ? c.clicks/c.impressions*100 : 0;
+    const ccpc = c.clicks ? c.spend/c.clicks : 0;
+    const on = (c.status||'').toUpperCase()==='ACTIVE';
+    const obj = (c.objective||'').replace(/_/g,' ').toLowerCase().replace(/^\w/,m=>m.toUpperCase());
+    return `
+    <div class="camp">
+      <div><div class="c-name">${c.name||'—'}</div>${obj?`<span class="c-obj">${obj}</span>`:''}</div>
+      <div class="c-status"><span class="dot ${on?'on':'off'}"></span>${on?'Attiva':(c.status||'—')}</div>
+      <div class="m">${fmt(c.impressions)}</div>
+      <div class="m">${fmt(c.clicks)}</div>
+      <div class="m">${pct(cctr)} %</div>
+      <div class="m">${eur(c.spend)} €</div>
+      <div class="m">${eur2(ccpc)} €</div>
+    </div>`;
+  }).join('');
+
+  // ── Tabella post ──
   const rows = posts.map(p=>{
     const key = p.post || p.creative;
     const lb = labels[key] || { autore:'(post '+String(key).split(':').pop()+')', ruolo:'—', colore:'#3A5575', testo:'— label mancante: aggiungi in creative-labels.json —' };
     const rc = react(p);
-    const ctr = p.impressions ? p.clicks/p.impressions*100 : 0;
-    const cpc = p.clicks ? p.spend/p.clicks : 0;
-    return { ...p, lb, rc, ctr, cpc };
+    const pctr = p.impressions ? p.clicks/p.impressions*100 : 0;
+    const pcpc = p.clicks ? p.spend/p.clicks : 0;
+    return { ...p, lb, rc, ctr:pctr, cpc:pcpc };
   }).sort((a,b)=>b.clicks-a.clicks);
-
-  const avgCtr = rows.reduce((s,r)=>s+r.ctr,0)/rows.length;
-  const avgCpc = rows.reduce((s,r)=>s+r.cpc,0)/rows.length;
-
+  const avgCtr = rows.length?rows.reduce((s,r)=>s+r.ctr,0)/rows.length:0;
+  const avgCpc = rows.length?rows.reduce((s,r)=>s+r.cpc,0)/rows.length:0;
   document.getElementById('postCount').textContent = rows.length+' post · ordinati per click';
   document.getElementById('postList').innerHTML = rows.map((r,i)=>{
     const ctrCls = r.ctr>=avgCtr*1.15?'good':(r.ctr<avgCtr*0.85?'warn':'');
@@ -219,36 +307,55 @@ function render(posts, labels, meta) {
       <div class="m ${cpcCls}">${eur2(r.cpc)} €</div>
     </div>`;
   }).join('');
+
+  // ── Focus engagement ──
+  const E = posts.reduce((a,p)=>({
+    likes:a.likes+(p.likes||0), comments:a.comments+(p.comments||0),
+    shares:a.shares+(p.shares||0), follows:a.follows+(p.follows||0)
+  }), {likes:0,comments:0,shares:0,follows:0});
+  const engs = [
+    { i:'👍', n:'Reazioni social', v:fmt(E.likes) },
+    { i:'➕', n:'Nuovi follower',  v:'+'+fmt(E.follows) },
+    { i:'📝', n:'Post attivi',     v:fmt(posts.length) },
+    { i:'🔁', n:'Condivisioni',    v:fmt(E.shares) },
+    { i:'💬', n:'Commenti',        v:fmt(E.comments) }
+  ];
+  document.getElementById('engGrid').innerHTML = engs.map(e=>`
+    <div class="eng">
+      <div class="eng-ico">${e.i}</div>
+      <div class="eng-val">${e.v}</div>
+      <div class="eng-name">${e.n}</div>
+    </div>`).join('');
 }
 
 // ──────────────────────────────────────────────────────────────────────
-//  Caricamento dati — prova JSON reali (serviti via http), fallback mock
+//  Caricamento dati — JSON reali (via http), fallback mock
 // ──────────────────────────────────────────────────────────────────────
-async function loadData() {
-  try {
+async function loadData(){
+  try{
     const [numsR, labsR] = await Promise.all([
       fetch('./sync/social-data.json?t='+Date.now(),     {cache:'no-store'}),
       fetch('./sync/creative-labels.json?t='+Date.now(), {cache:'no-store'})
     ]);
-    if (!numsR.ok) throw new Error('social-data.json non trovato');
+    if(!numsR.ok) throw new Error('social-data.json non trovato');
     const nums = await numsR.json();
     const labs = labsR.ok ? await labsR.json() : {};
     delete labs._istruzioni;
     document.getElementById('mockNote').classList.add('hide');
-    render(nums.posts, labs, nums.meta);
+    render(nums.campaigns||[], nums.posts, labs, nums.meta);
     return;
-  } catch(e){ console.warn('Dati reali non caricati, uso mock:', e.message); }
-
-  render(MOCK_POSTS, MOCK_LABELS, MOCK_META);
+  }catch(e){ console.warn('Dati reali non caricati, uso mock:', e.message); }
+  render(MOCK_CAMPAIGNS, MOCK_POSTS, MOCK_LABELS, MOCK_META);
 }
 
 
 // ▼ DATI REALI INIETTATI da build-standalone.js — non modificare a mano ▼
-const REAL_POSTS  = [{"post":"urn:li:share:7334231257268076545","postUrl":"https://www.linkedin.com/feed/update/urn:li:share:7334231257268076545","creatives":["urn:li:sponsoredCreative:1436748143","urn:li:sponsoredCreative:1436748123"],"impressions":2414,"clicks":181,"spend":174.49620089793163,"likes":4,"comments":1,"shares":0,"follows":0,"engagements":188,"leads":0},{"post":"urn:li:share:7455203771044835328","postUrl":"https://www.linkedin.com/feed/update/urn:li:share:7455203771044835328","creatives":["urn:li:sponsoredCreative:1436864693","urn:li:sponsoredCreative:1436718743"],"impressions":1282,"clicks":52,"spend":78.54346672451143,"likes":1,"comments":1,"shares":0,"follows":0,"engagements":63,"leads":0},{"post":"urn:li:share:7334230830669524992","postUrl":"https://www.linkedin.com/feed/update/urn:li:share:7334230830669524992","creatives":["urn:li:sponsoredCreative:1436827893","urn:li:sponsoredCreative:1436708563"],"impressions":1081,"clicks":40,"spend":73.67071937461816,"likes":0,"comments":0,"shares":0,"follows":0,"engagements":46,"leads":0}];
+const REAL_CAMPAIGNS = [{"campaign":"urn:li:sponsoredCampaign:857400246","impressions":2534,"clicks":152,"spend":191.77298578543397,"likes":2,"comments":0,"shares":0,"follows":0,"engagements":158,"leads":0,"name":"engament - company list - 06/2026 - USA","objective":"ENGAGEMENT","status":"ACTIVE"},{"campaign":"urn:li:sponsoredCampaign:778203023","impressions":2351,"clicks":126,"spend":140.88151158100263,"likes":4,"comments":2,"shares":0,"follows":0,"engagements":144,"leads":0,"name":"engament - company list - 06/2026 - EU","objective":"ENGAGEMENT","status":"ACTIVE"}];
+const REAL_POSTS  = [{"post":"urn:li:share:7334231257268076545","postUrl":"https://www.linkedin.com/feed/update/urn:li:share:7334231257268076545","creatives":["urn:li:sponsoredCreative:1436748143","urn:li:sponsoredCreative:1436748123"],"impressions":2470,"clicks":186,"spend":178.44868690010998,"likes":5,"comments":1,"shares":0,"follows":0,"engagements":193,"leads":0},{"post":"urn:li:share:7455203771044835328","postUrl":"https://www.linkedin.com/feed/update/urn:li:share:7455203771044835328","creatives":["urn:li:sponsoredCreative:1436864693","urn:li:sponsoredCreative:1436718743"],"impressions":1329,"clicks":52,"spend":80.42234904312602,"likes":1,"comments":1,"shares":0,"follows":0,"engagements":63,"leads":0},{"post":"urn:li:share:7334230830669524992","postUrl":"https://www.linkedin.com/feed/update/urn:li:share:7334230830669524992","creatives":["urn:li:sponsoredCreative:1436827893","urn:li:sponsoredCreative:1436708563"],"impressions":1086,"clicks":40,"spend":73.78346142320058,"likes":0,"comments":0,"shares":0,"follows":0,"engagements":46,"leads":0}];
 const REAL_LABELS = {"urn:li:share:7334231257268076545":{"autore":"","ruolo":"","colore":"#0A66C2","testo":"","_post_url":"https://www.linkedin.com/feed/update/urn:li:share:7334231257268076545"},"urn:li:share:7455203771044835328":{"autore":"","ruolo":"","colore":"#8B5CF6","testo":"","_post_url":"https://www.linkedin.com/feed/update/urn:li:share:7455203771044835328"},"urn:li:share:7334230830669524992":{"autore":"","ruolo":"","colore":"#0CC4B0","testo":"","_post_url":"https://www.linkedin.com/feed/update/urn:li:share:7334230830669524992"}};
-const REAL_META   = {"client":"Intech","period":"","updated":"2026-06-23"};
+const REAL_META   = {"client":"Intech Rotors","period":"","windowDays":60,"updated":"2026-06-23"};
 document.getElementById('mockNote').remove();
-render(REAL_POSTS, REAL_LABELS, REAL_META);
+render(REAL_CAMPAIGNS, REAL_POSTS, REAL_LABELS, REAL_META);
 
 </script>
 </body>
