@@ -94,6 +94,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .eng-name{font-size:11px;color:var(--text2);margin-top:8px;font-weight:500}
 
 .empty{padding:26px 18px;text-align:center;color:var(--text3);font-size:12.5px}
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:11px;font-size:11.5px;color:var(--text2)}
+.legend .lg{display:inline-flex;align-items:center;gap:7px}
+.legend .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+.legend .sw-g{background:var(--green)} .legend .sw-a{background:var(--amber)}
+.legend .lg-note{color:var(--text3);font-style:italic}
 
 /* ── Footer fisso ─────────────────────────────────────────────── */
 .footer{position:fixed;left:0;right:0;bottom:0;background:var(--navy);color:rgba(255,255,255,.7);height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;font-size:11.5px;z-index:20}
@@ -153,6 +158,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
       <span>Autore / post · campagna</span><span>Impressioni</span><span>Click</span><span>CTR</span><span>CPM</span><span>Reazioni</span><span>Spesa</span><span>CPC</span>
     </div>
     <div id="postList"></div>
+  </div>
+  <div class="legend">
+    <span class="lg"><span class="sw sw-g"></span> Verde = sopra la media (CTR più alto / CPC più basso)</span>
+    <span class="lg"><span class="sw sw-a"></span> Ambra = sotto la media (CTR più basso / CPC più alto)</span>
+    <span class="lg-note">Confronto tra i post di questa tabella, sul periodo selezionato.</span>
   </div>
 
   <div class="sec-label">Focus engagement (obiettivo campagna)</div>
