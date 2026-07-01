@@ -74,7 +74,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .post.head span{font-size:10px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);text-align:right}
 .post.head span:first-child{text-align:left}
 .author{display:flex;gap:12px;align-items:flex-start;padding-right:18px}
-.avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:13px;color:#fff}
+.avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:13px;color:#fff;overflow:hidden}
+.avatar-flag{box-shadow:0 0 0 1px rgba(6,32,64,.12) inset}
+.avatar-flag svg{width:100%;height:100%;display:block}
 .a-name{font-size:13px;font-weight:600;margin-bottom:2px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .c-tag{font-size:9.5px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:#E8F0FB;color:var(--li-blue)}
 .c-flag{display:inline-flex;line-height:0}
@@ -213,14 +215,21 @@ const addDays = (dt,n) => new Date(dt.getTime()+n*864e5);
 
 let DATA = { campaigns:[], posts:[], labels:{}, meta:{} };
 
-// Bandierine SVG (no emoji → rese identiche su ogni device). Solo tabella post.
-const FLAG_US = `<svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true"><rect width="20" height="14" fill="#B22234"/><rect y="2" width="20" height="2" fill="#fff"/><rect y="6" width="20" height="2" fill="#fff"/><rect y="10" width="20" height="2" fill="#fff"/><rect width="9" height="8" fill="#3C3B6E"/></svg>`;
-const FLAG_EU = `<svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true"><rect width="20" height="14" fill="#003399"/><g fill="#FFCC00"><circle cx="14" cy="7" r=".7"/><circle cx="13.46" cy="9" r=".7"/><circle cx="12" cy="9.46" r=".7"/><circle cx="10" cy="11" r=".7"/><circle cx="8" cy="9.46" r=".7"/><circle cx="6.54" cy="9" r=".7"/><circle cx="6" cy="7" r=".7"/><circle cx="6.54" cy="5" r=".7"/><circle cx="8" cy="4.54" r=".7"/><circle cx="10" cy="3" r=".7"/><circle cx="12" cy="4.54" r=".7"/><circle cx="13.46" cy="5" r=".7"/></g></svg>`;
-function flagBadge(tag){
+// Bandiere SVG (no emoji → rese identiche su ogni device). Riempiono l'avatar del post.
+// viewBox quadrato + preserveAspectRatio slice → coprono il cerchio senza deformarsi.
+const FLAG_US = `<svg viewBox="0 0 14 14" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="14" height="14" fill="#B22234"/><rect y="2" width="14" height="2" fill="#fff"/><rect y="6" width="14" height="2" fill="#fff"/><rect y="10" width="14" height="2" fill="#fff"/><rect width="7" height="8" fill="#3C3B6E"/></svg>`;
+const FLAG_EU = `<svg viewBox="0 0 14 14" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="14" height="14" fill="#003399"/><g fill="#FFCC00"><circle cx="11" cy="7" r=".7"/><circle cx="10.46" cy="9" r=".7"/><circle cx="9" cy="10.46" r=".7"/><circle cx="7" cy="11" r=".7"/><circle cx="5" cy="10.46" r=".7"/><circle cx="3.54" cy="9" r=".7"/><circle cx="3" cy="7" r=".7"/><circle cx="3.54" cy="5" r=".7"/><circle cx="5" cy="3.54" r=".7"/><circle cx="7" cy="3" r=".7"/><circle cx="9" cy="3.54" r=".7"/><circle cx="10.46" cy="5" r=".7"/></g></svg>`;
+function avatarFlag(tag){
   const t=(tag||'').toUpperCase();
-  if(t.includes('USA')||t==='US') return `<span class="c-flag" title="USA">${FLAG_US}</span>`;
-  if(t.includes('EU'))            return `<span class="c-flag" title="EU">${FLAG_EU}</span>`;
-  return tag?`<span class="c-tag">${tag}</span>`:'';   // fallback testo per tag non mappati
+  if(t.includes('USA')||t==='US') return FLAG_US;
+  if(t.includes('EU'))            return FLAG_EU;
+  return '';
+}
+// Avatar del post: bandiera della campagna se mappata, altrimenti iniziali autore.
+function avatarHtml(r){
+  const f=avatarFlag(r.campTag);
+  if(f) return `<div class="avatar avatar-flag" title="${r.campTag||''}">${f}</div>`;
+  return `<div class="avatar" style="background:${r.lb.colore||'#3A5575'}">${r.lb.iniziali||initials(r.lb.autore)}</div>`;
 }
 
 function emptyM(){ const o={}; for(const k of METRICS) o[k]=0; return o; }
@@ -343,9 +352,9 @@ function render(){
     return `
     <div class="post">
       <div class="author">
-        <div class="avatar" style="background:${r.lb.colore||'#3A5575'}">${r.lb.iniziali||initials(r.lb.autore)}</div>
+        ${avatarHtml(r)}
         <div>
-          <div class="a-name">${r.lb.autore}${flagBadge(r.campTag)}</div>
+          <div class="a-name">${r.lb.autore}</div>
           <div class="a-role">${r.lb.ruolo}</div>
           <div class="a-text">${r.lb.testo}</div>
           ${r.postUrl?`<a class="a-link" href="${r.postUrl}" target="_blank" rel="noopener">apri post</a>`:''}
